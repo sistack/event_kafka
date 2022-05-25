@@ -21,4 +21,8 @@ Lancer le run.bat à la racine du répertoire Kafka, cela va permettre de lancer
 Deux fenêtres CMD doivent s’ouvrir, sans erreur.
 
 Si le serveur Kafka a des problèmes pour se lancer, supprimer tout le contenu du répertoire “data” dans la racine.
+
+>> Sur Linux: 
+>> https://kafka.apache.org/quickstart
+
 # event_kafka
