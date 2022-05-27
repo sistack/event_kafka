@@ -22,11 +22,14 @@ public class JobController {
 
   private final JobLauncher jobLauncher;
   private final Job simpleJob;
+  private final Job jobLetter;
 
   @RequestMapping("/example")
   public void simpleJob(@RequestParam(value = "label") final String label) {
     runJobB(this.simpleJob, label);
   }
+  //@RequestMapping("/jobletter")
+  //public void jobLetter(@RequestParam(value = "jobletter") final String label) {runJobB(this.jobLetter, label); }
 
   private void runJobB(final Job parJob, final String label) {
     final JobParameters locParamJobParameters = new JobParametersBuilder()
@@ -36,6 +39,7 @@ public class JobController {
 
     try {
       log.info("[Job] running . . .");
+
       jobLauncher.run(parJob, locParamJobParameters);
     } catch (Exception ex) {
       log.error("[RUN JOB ERROR] : " + ex.getMessage());

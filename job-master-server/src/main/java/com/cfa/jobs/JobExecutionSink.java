@@ -1,5 +1,8 @@
 package com.cfa.jobs;
 
+import com.cfa.objects.controller.LetterController;
+import com.cfa.objects.letter.Letter;
+import com.cfa.objects.repository.LetterRepository;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +22,11 @@ import org.springframework.messaging.support.ErrorMessage;
 @EnableBinding(Sink.class)
 @Slf4j
 public class JobExecutionSink {
-
     /**
      * to intercept unsent messages
      */
+    @Autowired
+    LetterController letterController;
     @ServiceActivator(inputChannel = "errorChannel")
     public void errorChannel(final ErrorMessage errorMessage) {
         final Message<?> locFailedMessage = ((KafkaSendFailureException) errorMessage.getPayload()).getFailedMessage();
@@ -34,6 +38,7 @@ public class JobExecutionSink {
     @SneakyThrows
     @StreamListener(target = Sink.INPUT, condition = "headers['custom_info']=='end'")
     public void receiveResult(final Message<String> message) {
+        letterController.save((Letter) message);
         log.info("[Server END] received result {} ", message.getPayload());
     }
 
