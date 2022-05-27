@@ -10,6 +10,6 @@ import java.util.Optional;
 
 @Repository
 @Service
-public interface LetterRepository extends Jpae/id/Repository<Letter, Integer> {
+public interface LetterRepository extends JpaRepository<Letter, Integer> {
 
 }

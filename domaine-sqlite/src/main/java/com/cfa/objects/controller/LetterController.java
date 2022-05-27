@@ -21,13 +21,16 @@ public class LetterController {
 
     // Les API
     // getAll
-    @GetMapping("/")
+    @GetMapping("/letters")
     public List<Letter> getAll(){
         return letterRepository.findAll();
     }
     // findByID
-    @GetMapping("/getById")
-    public Letter getById(@RequestParam(value = "id") int id){
+   // ("/getById/id")
+    //@RequestParam(value = "id") int id, @PathVariable String id
+   // public ResponseData getUser(@PathVariable Long id)
+    @GetMapping("/getById/{id}")
+    public Letter getById(@PathVariable("id") int id){
         return letterRepository.getOne(id);
     }
     // save
